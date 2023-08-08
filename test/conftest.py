@@ -12,5 +12,7 @@ def set_up(playwright: Playwright):
     page = context.new_page()
     url = URL_s
     page.goto(url.Base_url)
+    page.request.get(url.Base_url)
+    print(page.request.get(url.Base_url))
     yield page
     browser.close()
