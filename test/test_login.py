@@ -2,7 +2,6 @@ from playwright.sync_api import expect
 from lib.credentials import Credentials
 from objectRepository.loginObjects import Login_Objects
 from lib.url_s import URL_s
-from lib.credentials import Credentials
 
 """
         To test login functionality
