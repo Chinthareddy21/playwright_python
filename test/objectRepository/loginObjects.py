@@ -1,4 +1,6 @@
 class Login_Objects:
+        # Bash logo
+        logo = '[class="bash-logo"]'
         # Account icon in homepage
         account_button = '[class="vtex-login-2-x-label t-action--small pl4 tfg-label-class dn db-l"]'
         # Email edit box
@@ -14,3 +16,7 @@ class Login_Objects:
         profile_details = '[class="vtex-login-2-x-profileDetails vtex-login-2-x-profileDetails--tfg-header-desktop-login db no-underline t-small c-muted-1 hover-c-action-primary pv3"]'
         # Account header in account page (User name header)
         account_header = '[class="vtex-my-account-1-x-userName f4 c-on-base fw3 nowrap"]'
+        # Error message on invalid credentials for login
+        error_message = '[class="FlashMessage_flashMessage__QNV+- FlashMessage_error__B8EuP FlashMessage_visible__Vcv70"]'
+        # Logout button
+        logout_button = '[class="vtex-login-2-x-logoutButton t-small bn pa0 c-muted-1 hover-c-danger bg-transparent pointer"]'

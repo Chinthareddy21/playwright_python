@@ -5,7 +5,7 @@ from lib.url_s import URL_s
 
 """
         To test login functionality
-        Run command: pytest -s test/test_login.py
+        Run command: pytest test/test_login.py
 """
 
 def test_login_with_valid_credentials(Home_page):
@@ -17,6 +17,13 @@ def test_login_with_valid_credentials(Home_page):
         
         # Step to login page navigation
         page.locator(login.account_button).click()
+
+        # Getting login page API status code
+        page.request.get(url.Login_page_url)
+
+        # printing login page API status code
+        print(page.request.get(url.Login_page_url))
+
         # Login page screenshot
         page.screenshot(path="Screenshots/login/login page.png")
         # Entering valid username & password
@@ -35,14 +42,75 @@ def test_login_with_valid_credentials(Home_page):
         page.locator(login.profile_details).click()
 
         # Account page url verification
-        expect(page).to_have_url(url.Account_page_url)
+        expect(page).to_have_url(url.Profile_page_url)
         # Verifying wether user name is displayed or not
         expect(page.locator(login.account_header)).to_have_text("Skyreaper!")
 
         # Getting account page API status code 
-        page.request.get(url.Account_page_url)
+        page.request.get(url.Profile_page_url)
         # printing account page API status code
-        print(page.request.get(url.Account_page_url))
+        print(page.request.get(url.Profile_page_url))
 
         # Account page screenshot
         page.screenshot(path="Screenshots/login/account page.png")
+
+def test_logout(Home_page):
+        # Constructors
+        page = Home_page
+        login = Login_Objects
+        url = URL_s
+        
+        # Verifying wether user successfully logged in or not 
+        expect(page.locator(login.account_button_after_login)).to_have_text("Hello, Skyreaper")
+
+        # Logging out
+        page.locator(login.account_button_after_login).click()
+        page.locator(login.logout_button).click()
+
+        # Homepage after successful logout screenshot 
+        page.screenshot(path="Screenshots/login/login page on logout.png")
+
+def test_login_with_invalid_username(Home_page):
+        # Constructors
+        page = Home_page
+        login = Login_Objects
+        url = URL_s
+        credentials = Credentials
+        
+        # Step to login page navigation
+        page.locator(login.account_button).click()
+        # Getting login page API status code
+        page.request.get(url.Login_page_url)
+        # printing login page API status code
+        print(page.request.get(url.Login_page_url))
+        # Login page screenshot
+        page.screenshot(path="Screenshots/login/login page.png")
+
+        # Entering invalid username & valid password
+        page.locator(login.email_editbox_input).fill(credentials.invalid_username)
+        page.locator(login.password_editbox_input).fill(credentials.password)
+        # Clicking on login button
+        page.locator(login.login_button).click()
+        
+        # Verifying wether error message is displayed or not
+        expect(page.locator(login.error_message)).to_have_text("We couldn't log you in. Please try again.")
+        # Login page screenshot on invalid username
+        page.screenshot(path="Screenshots/login/login page.png")
+
+def test_login_with_invalid_password(Home_page):
+        # Constructors
+        page = Home_page
+        login = Login_Objects
+        url = URL_s
+        credentials = Credentials
+
+        # Entering invalid username & valid password
+        page.locator(login.email_editbox_input).fill(credentials.username)
+        page.locator(login.password_editbox_input).fill(credentials.invalid_password)
+        # Clicking on login button
+        page.locator(login.login_button).click()
+        
+        # Verifying wether error message is displayed or not
+        expect(page.locator(login.error_message)).to_have_text("We couldn't log you in. Please try again.")
+        # Login page screenshot on invalid username
+        page.screenshot(path="Screenshots/login/login page.png")

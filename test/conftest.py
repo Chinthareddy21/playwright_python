@@ -61,6 +61,11 @@ def login(playwright: Playwright):
 
     # Step to login page navigation
     page.locator(login.account_button).click()
+    # Getting login page API status code
+    page.request.get(url.Login_page_url)
+    # printing login page API status code
+    print(page.request.get(url.Login_page_url))
+        
     # Login page screenshot
     page.screenshot(path="Screenshots/login/login page.png")
     # Entering valid username & password
