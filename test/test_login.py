@@ -67,6 +67,8 @@ def test_logout(Home_page):
         page.locator(login.account_button_after_login).click()
         page.locator(login.logout_button).click()
 
+        expect(page.locator(login.email_editbox_input)).to_be_visible()
+
         # Homepage after successful logout screenshot 
         page.screenshot(path="Screenshots/login/login page on logout.png")
 
@@ -76,15 +78,6 @@ def test_login_with_invalid_username(Home_page):
         login = Login_Objects
         url = URL_s
         credentials = Credentials
-        
-        # Step to login page navigation
-        page.locator(login.account_button).click()
-        # Getting login page API status code
-        page.request.get(url.Login_page_url)
-        # printing login page API status code
-        print(page.request.get(url.Login_page_url))
-        # Login page screenshot
-        page.screenshot(path="Screenshots/login/login page.png")
 
         # Entering invalid username & valid password
         page.locator(login.email_editbox_input).fill(credentials.invalid_username)
@@ -95,7 +88,7 @@ def test_login_with_invalid_username(Home_page):
         # Verifying wether error message is displayed or not
         expect(page.locator(login.error_message)).to_have_text("We couldn't log you in. Please try again.")
         # Login page screenshot on invalid username
-        page.screenshot(path="Screenshots/login/login page.png")
+        page.screenshot(path="Screenshots/login/invalid username.png")
 
 def test_login_with_invalid_password(Home_page):
         # Constructors
@@ -104,7 +97,7 @@ def test_login_with_invalid_password(Home_page):
         url = URL_s
         credentials = Credentials
 
-        # Entering invalid username & valid password
+        # Entering valid username & invalid password
         page.locator(login.email_editbox_input).fill(credentials.username)
         page.locator(login.password_editbox_input).fill(credentials.invalid_password)
         # Clicking on login button
@@ -112,5 +105,5 @@ def test_login_with_invalid_password(Home_page):
         
         # Verifying wether error message is displayed or not
         expect(page.locator(login.error_message)).to_have_text("We couldn't log you in. Please try again.")
-        # Login page screenshot on invalid username
-        page.screenshot(path="Screenshots/login/login page.png")
+        # Login page screenshot on invalid password
+        page.screenshot(path="Screenshots/login/invalid password.png")
