@@ -1,7 +1,6 @@
 from playwright.sync_api import expect, Page
 from lib.credentials import Credentials
 from lib.url_s import URL_s
-from objectRepository.searchObjects import Search
 from objectRepository.addToCartObjects import Add_To_Cart
 
 """
@@ -12,8 +11,6 @@ from objectRepository.addToCartObjects import Add_To_Cart
 def test_add_to_cart(login):
         # Constructors
         page = login
-        search = Search
-        add_to_cart = Add_To_Cart
         url = URL_s
         credentials = Credentials
 
@@ -28,8 +25,41 @@ def test_add_to_cart(login):
         # Selecting desired item
         page.get_by_role("link", name=credentials.Product_3).click()
         # Adding item to cart
-        page.get_by_role("button", name=add_to_cart.add_to_cart_button).click()
+        page.get_by_role("button", name="Add to cart").click()
 
         # Add to cart screenshot
         page.screenshot(path="Screenshots/add_to_cart/added to cart.png")
+
+
+def test_adding(login):
+        # Constructors
+        page = login
+        add_to_cart = Add_To_Cart
+
+        # increasing quantity
+        page.locator(add_to_cart.plus).click()
+
+        # Check out screenshot
+        page.screenshot(path="Screenshots/add_to_cart/increasing quantity.png")
         
+def test_decreasing(login):
+        # Constructors
+        page = login
+        add_to_cart = Add_To_Cart
+
+        # Decreasing quantity
+        page.locator(add_to_cart.minus).click()
+
+        # Check out screenshot
+        page.screenshot(path="Screenshots/add_to_cart/decreasing quantity.png")
+
+def test_deleting(login):
+        # Constructors
+        page = login
+        add_to_cart = Add_To_Cart
+
+        # Deleting quantity
+        page.locator(add_to_cart.delete).click()
+
+        # Check out screenshot
+        page.screenshot(path="Screenshots/add_to_cart/deleting item.png")

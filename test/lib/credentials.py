@@ -7,7 +7,7 @@ class Credentials:
     invalid_username = 'skyreaperrambo1@gmail.com'
 
     # invalid username 
-    invalid_password = 'vmsveBpP_BPL-72'
+    invalid_password = 'vmsveBpP_BPL-73'
 
     # products
     Product_1 = "shirt"
@@ -19,3 +19,15 @@ class Credentials:
     # Search page title
     Product_1_search_title = "shirt - Bash.com"
     Product_2_search_title = "watches - Bash.com"
+
+    # Check out details
+    Product_name = '\
+        Police Avondale Stainless Steel Navy Dial Bracelet Watch\
+        \
+        Police\
+        \
+        \
+        Qty: 1 \
+        \
+        \
+        '
