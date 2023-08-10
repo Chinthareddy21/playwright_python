@@ -5,7 +5,7 @@ from lib.url_s import URL_s
 
 """
         To test login functionality
-        Run command: pytest test/test_login.py
+        Run command: pytest test/test_Login.py
 """
 
 def test_login_with_valid_credentials(Home_page):

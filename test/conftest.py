@@ -8,13 +8,14 @@ from lib.credentials import Credentials
 # Assertions time out
 expect.set_options(timeout=60_000)
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="module")
 def Home_page(playwright: Playwright):
     # Browser and page set up
     browser_Chrome = playwright.chromium.launch(headless=False)
     browser_Firefox = playwright.firefox.launch(headless=False)
     browser_Webkit = playwright.webkit.launch(headless=False)
-    context = browser_Chrome.new_context()
+    browser = browser_Webkit
+    context = browser.new_context()
     page = context.new_page()
 
     url = URL_s
@@ -36,15 +37,17 @@ def Home_page(playwright: Playwright):
     
     # Browser close
     context.close()
+    browser.close()
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="module")
 def login(playwright: Playwright):
     # Browser and page set up
     browser_Chrome = playwright.chromium.launch(headless=False)
     browser_Firefox = playwright.firefox.launch(headless=False)
     browser_Webkit = playwright.webkit.launch(headless=False)
-    context = browser_Chrome.new_context()
+    browser = browser_Webkit
+    context = browser.new_context()
     page = context.new_page()
    
     # Constructors
@@ -87,3 +90,4 @@ def login(playwright: Playwright):
     
     # Browser close
     context.close()
+    browser.close()

@@ -5,7 +5,7 @@ from objectRepository.checkOutObjects import Check_Out
 
 """
         To test login functionality
-        Run command: pytest test/test_login.py
+        Run command: pytest test/test_Check_Out.py
 """
 
 def test_check_out(login):

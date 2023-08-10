@@ -5,7 +5,7 @@ from objectRepository.searchObjects import Search
 
 """
         To test login functionality
-        Run command: pytest test/test_login.py
+        Run command: pytest test/test_Search.py
 """
 
 def test_Search_1(login):

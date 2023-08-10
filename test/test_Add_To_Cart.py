@@ -5,7 +5,7 @@ from objectRepository.addToCartObjects import Add_To_Cart
 
 """
         To test login functionality
-        Run command: pytest test/test_login.py
+        Run command: pytest test/test_Add_To_Cart.py
 """
 
 def test_add_to_cart(login):
@@ -42,7 +42,7 @@ def test_adding(login):
         # Check out screenshot
         page.screenshot(path="Screenshots/add_to_cart/increasing quantity.png")
         
-def test_decreasing(login):
+def test_removing(login):
         # Constructors
         page = login
         add_to_cart = Add_To_Cart
