@@ -1,7 +1,7 @@
 from playwright.sync_api import expect
 from lib.credentials import Credentials
 from lib.url_s import URL_s
-from objectRepository.seaarchObjects import Search
+from objectRepository.searchObjects import Search
 
 """
         To test login functionality

@@ -20,6 +20,8 @@ def Home_page(playwright: Playwright):
     url = URL_s
     # Homepage navigation
     page.goto(url.Base_url)
+        
+    page.get_by_label("Close").click()
 
     # Getting homepage API status code
     page.request.get(url.Base_url)
@@ -52,6 +54,8 @@ def login(playwright: Playwright):
         
     # Homepage navigation
     page.goto(url.Base_url)
+        
+    page.get_by_label("Close").click()
 
     # Getting homepage API status code
     page.request.get(url.Base_url)
