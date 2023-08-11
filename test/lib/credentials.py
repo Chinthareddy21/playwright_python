@@ -31,3 +31,6 @@ class Credentials:
         \
         \
         '
+    
+    bash_product_UUID = 'b2bdfbf9-3f3b-441e-bc93-acd80c3bd1ba'
+    Product_code = '01A722AAEB8'

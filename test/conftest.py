@@ -14,7 +14,7 @@ def Home_page(playwright: Playwright):
     browser_Chrome = playwright.chromium.launch(headless=False)
     browser_Firefox = playwright.firefox.launch(headless=False)
     browser_Webkit = playwright.webkit.launch(headless=False)
-    browser = browser_Webkit
+    browser = browser_Chrome
     context = browser.new_context()
     page = context.new_page()
 
@@ -46,7 +46,7 @@ def login(playwright: Playwright):
     browser_Chrome = playwright.chromium.launch(headless=False)
     browser_Firefox = playwright.firefox.launch(headless=False)
     browser_Webkit = playwright.webkit.launch(headless=False)
-    browser = browser_Webkit
+    browser = browser_Chrome
     context = browser.new_context()
     page = context.new_page()
    
