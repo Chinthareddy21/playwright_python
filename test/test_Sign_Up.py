@@ -8,7 +8,7 @@ from lib.url_s import URL_s
         Run command: pytest test/test_Sign_Up.py
 """
 
-def test_login_with_valid_credentials(Home_page):
+def test_sign_up_with_new_email(Home_page):
         # Constructors
         page = Home_page
         signUp = Sign_Up_Objects
@@ -39,3 +39,22 @@ def test_login_with_valid_credentials(Home_page):
 
         # Login page screenshot
         page.screenshot(path="Screenshots/sign_Up/Signup page.png")
+
+def test_sign_up_with_existing_email(Home_page):
+        # Constructors
+        page = Home_page
+        signUp = Sign_Up_Objects
+        
+        page.go_back()
+
+        # Entering user name for sign up
+        page.locator(signUp.email_editbox_input).click()
+        page.locator(signUp.email_editbox_input).fill(Credentials.username)
+
+        # Clicking on create password button
+        page.locator(signUp.create_password_button).click()
+
+        expect(page.locator(signUp.error_message)).to_have_text('Existing profile found')
+
+        # Login page screenshot
+        page.screenshot(path="Screenshots/sign_Up/Signup error.png")

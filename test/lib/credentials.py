@@ -37,3 +37,5 @@ class Credentials:
 
     # Email for user sign up
     Email = 'test220022@gmail.com'
+
+    
