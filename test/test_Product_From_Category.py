@@ -31,7 +31,7 @@ def test_Product_From_Category(login):
         page.screenshot(path="Screenshots/Product_From_Category/product from Category.png")
 
 
-def test_example(login):
+def test_Product_From_Components(login):
         # Constructors
         page = login
         product = Products_From_Category
