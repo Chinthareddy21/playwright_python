@@ -1,28 +1,48 @@
-from playwright.sync_api import Playwright, expect
+from playwright.sync_api import Playwright, expect, sync_playwright
 import pytest
 from lib.url_s import URL_s
 from objectRepository.loginObjects import Login_Objects
 from lib.credentials import Credentials
-
+import logging
 
 # Assertions time out
 expect.set_options(timeout=60_000)
 
 @pytest.fixture(scope="module")
-def Home_page(playwright: Playwright):
+def logger(request):
+    log_file = "logs.log"
+    logger = logging.getLogger("logs.log")
+    logger.setLevel(logging.DEBUG)
+    formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
+    console_handler = logging.StreamHandler()
+    file_handler = logging.FileHandler(log_file)
+    console_handler.setLevel(logging.INFO)
+    file_handler.setLevel(logging.DEBUG)
+    console_handler.setFormatter(formatter)
+    file_handler.setFormatter(formatter)
+    logger.addHandler(console_handler)
+    logger.addHandler(file_handler)
+    return logger
+
+@pytest.fixture(scope="module")
+def Home_page(playwright: Playwright, logger):
     # Browser and page set up
-    browser_Chrome = playwright.chromium.launch(headless=False)
-    browser_Firefox = playwright.firefox.launch(headless=False)
-    browser_Webkit = playwright.webkit.launch(headless=False)
-    browser = browser_Chrome
+    browser = playwright.chromium.launch(headless=False)
+    logger.info("Chrome browser started")
+    # browser = playwright.firefox.launch(headless=False)
+    # logger.info("Firefox browser started")
+    # browser = playwright.webkit.launch(headless=False)    
+    # logger.info("Webkit browser started")
     context = browser.new_context()
     page = context.new_page()
 
     url = URL_s
     # Homepage navigation
     page.goto(url.Base_url)
+    logger.info("Navigated to homepage & Homepage opened")
         
     page.get_by_label("Close").click()
+    logger.info("Ad pop-up closed")
 
     # Getting homepage API status code
     page.request.get(url.Base_url)
@@ -41,24 +61,31 @@ def Home_page(playwright: Playwright):
 
 
 @pytest.fixture(scope="module")
-def login(playwright: Playwright):
+def login(playwright: Playwright, logger):
     # Browser and page set up
-    browser_Chrome = playwright.chromium.launch(headless=False)
-    browser_Firefox = playwright.firefox.launch(headless=False)
-    browser_Webkit = playwright.webkit.launch(headless=False)
-    browser = browser_Chrome
+    browser = playwright.chromium.launch(headless=False)
+    logger.info("Chrome browser started")
+    # browser = playwright.firefox.launch(headless=False)
+    # logger.info("Firefox browser started")
+    # browser = playwright.webkit.launch(headless=False)    
+    # logger.info("Webkit browser started")
     context = browser.new_context()
     page = context.new_page()
-   
-    # Constructors
-    login = Login_Objects
+
     url = URL_s
     credentials = Credentials
-        
+    login = Login_Objects
+
     # Homepage navigation
     page.goto(url.Base_url)
+    
+    if page.url == url.Base_url:
+        logger.info("Navigated to homepage & Homepage opened")
+    else:
+        logger.warning("User is not navigated to homepage")
         
     page.get_by_label("Close").click()
+    logger.info("Ad pop-up closed")
 
     # Getting homepage API status code
     page.request.get(url.Base_url)
@@ -68,23 +95,27 @@ def login(playwright: Playwright):
 
     # Step to login page navigation
     page.locator(login.account_button).click()
+    logger.info("User clicked on account button & Navigated to Login page")
     # Getting login page API status code
     page.request.get(url.Login_page_url)
     # printing login page API status code
     print(page.request.get(url.Login_page_url))
-        
-    # Login page screenshot
-    page.screenshot(path="Screenshots/login/login page.png")
+    
     # Entering valid username & password
     page.locator(login.email_editbox_input).fill(credentials.username)
+    logger.info("User entered username")
     page.locator(login.password_editbox_input).fill(credentials.password)
+    logger.info("User entered password")
     # Clicking on login button
     page.locator(login.login_button).click()
+    logger.info("User clicked on login button")
 
     # User is navigated to homepage after successfully logged in
     expect(page).to_have_url(url.Base_url)
+    logger.info("User clicked on logged in successfully & Navigated to homepage")
     # Verifying wether user successfully logged in or not 
     expect(page.locator(login.account_button_after_login)).to_have_text("Hello, Skyreaper")
+    logger.info("User name is mentioned in user profile")
 
     yield page
     
