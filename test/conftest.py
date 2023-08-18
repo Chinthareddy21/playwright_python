@@ -1,12 +1,12 @@
-from playwright.sync_api import Playwright, expect, sync_playwright
+from playwright.sync_api import Playwright, expect
 import pytest
 from lib.url_s import URL_s
 from objectRepository.loginObjects import Login_Objects
 from lib.credentials import Credentials
 import logging
 
-# Assertions time out
-expect.set_options(timeout=60_000)
+
+expect.set_options(timeout=60*1000)
 
 @pytest.fixture(scope="module")
 def logger(request):
@@ -24,8 +24,9 @@ def logger(request):
     logger.addHandler(file_handler)
     return logger
 
+
 @pytest.fixture(scope="module")
-def Home_page(playwright: Playwright, logger):
+def home_page(playwright: Playwright, logger):
     # Browser and page set up
     browser = playwright.chromium.launch(headless=False)
     logger.info("Chrome browser started")
@@ -40,7 +41,7 @@ def Home_page(playwright: Playwright, logger):
     # Homepage navigation
     page.goto(url.Base_url)
     logger.info("Navigated to homepage & Homepage opened")
-        
+
     page.get_by_label("Close").click()
     logger.info("Ad pop-up closed")
 
@@ -54,7 +55,7 @@ def Home_page(playwright: Playwright, logger):
     page.screenshot(path="Screenshots/login/homepage.png")
 
     yield page
-    
+
     # Browser close
     context.close()
     browser.close()
@@ -78,12 +79,12 @@ def login(playwright: Playwright, logger):
 
     # Homepage navigation
     page.goto(url.Base_url)
-    
+
     if page.url == url.Base_url:
         logger.info("Navigated to homepage & Homepage opened")
     else:
         logger.warning("User is not navigated to homepage")
-        
+
     page.get_by_label("Close").click()
     logger.info("Ad pop-up closed")
 
@@ -100,7 +101,7 @@ def login(playwright: Playwright, logger):
     page.request.get(url.Login_page_url)
     # printing login page API status code
     print(page.request.get(url.Login_page_url))
-    
+
     # Entering valid username & password
     page.locator(login.email_editbox_input).fill(credentials.username)
     logger.info("User entered username")
@@ -118,7 +119,7 @@ def login(playwright: Playwright, logger):
     logger.info("User name is mentioned in user profile")
 
     yield page
-    
+
     # Browser close
     context.close()
     browser.close()

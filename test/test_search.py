@@ -8,45 +8,45 @@ from objectRepository.searchObjects import Search
         Run command: pytest test/test_Search.py
 """
 
-def test_Search_1(login):
-        # Constructors
-        page = login
-        search = Search
-        url = URL_s
-        credentials = Credentials
 
-        # Getting homepage after login API status code
-        page.request.get(url.Base_url)
+def test_search_1(login):
+    # Constructors
+    page = login
+    search = Search
+    url = URL_s
+    credentials = Credentials
 
-        # printing hommepage after login API status code
-        print(page.request.get(url.Base_url))
-        
-        # User search for desired product
-        page.get_by_placeholder(search.search_editbox).click()
-        page.get_by_placeholder(search.search_editbox).fill(credentials.Product_1)
-        page.get_by_placeholder(search.search_editbox).press("Enter")
+    # Getting homepage after login API status code
+    page.request.get(url.Base_url)
 
-        # Verifying wether user is navigated to desired search results page
-        expect(page).to_have_title(credentials.Product_1_search_title)
+    # printing homepage after login API status code
+    print(page.request.get(url.Base_url))
 
-        # results for product 1 screenshot
-        page.screenshot(path="Screenshots/search/search results(product 1).png")
+    # User search for desired product
+    page.get_by_placeholder(search.search_editbox).click()
+    page.get_by_placeholder(search.search_editbox).fill(credentials.Product_1)
+    page.get_by_placeholder(search.search_editbox).press("Enter")
 
-def test_Search_2(login):
-        # Constructors
-        page = login
-        search = Search
-        url = URL_s
-        credentials = Credentials
+    # Verifying wether user is navigated to desired search results page
+    expect(page).to_have_title(credentials.Product_1_search_title)
 
-        # User search for desired product
-        page.get_by_placeholder(search.search_editbox).click()
-        page.get_by_placeholder(search.search_editbox).fill(credentials.Product_2)
-        page.get_by_placeholder(search.search_editbox).press("Enter")
+    # results for product 1 screenshot
+    page.screenshot(path="Screenshots/search/search results(product 1).png")
 
-        # Verifying wether user is navigated to desired search results page
-        expect(page).to_have_title(credentials.Product_2_search_title)
 
-        # results for product 2 screenshot
-        page.screenshot(path="Screenshots/search/search results(product 2).png")
+def test_search_2(login):
+    # Constructors
+    page = login
+    search = Search
+    credentials = Credentials
 
+    # User search for desired product
+    page.get_by_placeholder(search.search_editbox).click()
+    page.get_by_placeholder(search.search_editbox).fill(credentials.Product_2)
+    page.get_by_placeholder(search.search_editbox).press("Enter")
+
+    # Verifying wether user is navigated to desired search results page
+    expect(page).to_have_title(credentials.Product_2_search_title)
+
+    # results for product 2 screenshot
+    page.screenshot(path="Screenshots/search/search results(product 2).png")

@@ -8,53 +8,55 @@ from lib.url_s import URL_s
         Run command: pytest test/test_Sign_Up.py
 """
 
-def test_sign_up_with_new_email(Home_page):
-        # Constructors
-        page = Home_page
-        signUp = Sign_Up_Objects
-        url = URL_s
-        
-        # Step to login page navigation
-        page.locator(signUp.account_button).click()
 
-        # Getting login page API status code
-        page.request.get(url.Login_page_url)
+def test_sign_up_with_new_email(home_page):
+    # Constructors
+    page = home_page
+    sign_up = Sign_Up_Objects
+    url = URL_s
 
-        # printing login page API status code
-        print(page.request.get(url.Login_page_url))
+    # Step to login page navigation
+    page.locator(sign_up.account_button).click()
 
-        # Login page screenshot
-        page.screenshot(path="Screenshots/sign_Up/login page.png")
-        # Clicking on register button
-        page.locator(signUp.register_button).click()
+    # Getting login page API status code
+    page.request.get(url.Login_page_url)
 
-        # Entering user name for sign up
-        page.locator(signUp.email_editbox_input).click()
-        page.locator(signUp.email_editbox_input).fill(Credentials.Email)
+    # printing login page API status code
+    print(page.request.get(url.Login_page_url))
 
-        # Clicking on create password button
-        page.locator(signUp.create_password_button).click()
+    # Login page screenshot
+    page.screenshot(path="Screenshots/sign_Up/login page.png")
+    # Clicking on register button
+    page.locator(sign_up.register_button).click()
 
-        expect(page.locator(signUp.Email_Verification)).to_have_text(Credentials.Email)
+    # Entering username for sign up
+    page.locator(sign_up.email_editbox_input).click()
+    page.locator(sign_up.email_editbox_input).fill(Credentials.Email)
 
-        # Login page screenshot
-        page.screenshot(path="Screenshots/sign_Up/Signup page.png")
+    # Clicking on create password button
+    page.locator(sign_up.create_password_button).click()
 
-def test_sign_up_with_existing_email(Home_page):
-        # Constructors
-        page = Home_page
-        signUp = Sign_Up_Objects
-        
-        page.go_back()
+    expect(page.locator(sign_up.Email_Verification)).to_have_text(Credentials.Email)
 
-        # Entering user name for sign up
-        page.locator(signUp.email_editbox_input).click()
-        page.locator(signUp.email_editbox_input).fill(Credentials.username)
+    # Login page screenshot
+    page.screenshot(path="Screenshots/sign_Up/Signup page.png")
 
-        # Clicking on create password button
-        page.locator(signUp.create_password_button).click()
 
-        expect(page.locator(signUp.error_message)).to_have_text('Existing profile found')
+def test_sign_up_with_existing_email(home_page):
+    # Constructors
+    page = home_page
+    sign_up = Sign_Up_Objects
 
-        # Login page screenshot
-        page.screenshot(path="Screenshots/sign_Up/Signup error.png")
+    page.go_back()
+
+    # Entering username for sign up
+    page.locator(sign_up.email_editbox_input).click()
+    page.locator(sign_up.email_editbox_input).fill(Credentials.username)
+
+    # Clicking on create password button
+    page.locator(sign_up.create_password_button).click()
+
+    expect(page.locator(sign_up.error_message)).to_have_text('Existing profile found')
+
+    # Login page screenshot
+    page.screenshot(path="Screenshots/sign_Up/Signup error.png")

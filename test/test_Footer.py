@@ -1,5 +1,3 @@
-from playwright.sync_api import expect
-from lib.credentials import Credentials
 from lib.url_s import URL_s
 from objectRepository.footerObjects import Footer_Objects
 
@@ -8,31 +6,33 @@ from objectRepository.footerObjects import Footer_Objects
         Run command: pytest test/test_Footer.py
 """
 
-# def test_footer(login):
-#         # Constructors
-#         page = login
-#         footer = Footer_Objects
-#         url = URL_s
 
-#         # Getting homepage after login API status code
-#         page.request.get(url.Base_url)
+def test_footer(login):
+    # Constructors
+    page = login
+    url = URL_s
 
-#         # printing hommepage after login API status code
-#         print(page.request.get(url.Base_url))
+    # Getting homepage after login API status code
+    page.request.get(url.Base_url)
 
-#         page.locator(footer.FAQ_S).click()
+    # printing homepage after login API status code
+    print(page.request.get(url.Base_url))
 
-def test_Follow_Us(login):
-        
-        # Constructors
-        page = login
-        footer = Footer_Objects
-        url = URL_s
+    page.get_by_role("link", name="Online shopping help & FAQs").click()
 
-        # Getting homepage after login API status code
-        page.request.get(url.Base_url)
 
-        # printing hommepage after login API status code
-        print(page.request.get(url.Base_url))
+def test_follow_us(login):
+    # Constructors
+    page = login
+    url = URL_s
+    footer = Footer_Objects
 
-        page.locator(footer.Facebook).click()
+    page.go_back()
+
+    # Getting homepage after login API status code
+    page.request.get(url.Base_url)
+
+    # printing homepage after login API status code
+    print(page.request.get(url.Base_url))
+
+    page.get_by_role(footer.Facebook).click()
