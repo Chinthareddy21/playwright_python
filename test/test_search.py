@@ -5,7 +5,7 @@ from objectRepository.searchObjects import Search
 
 """
         To test login functionality
-        Run command: pytest test/test_Search.py
+        Run command: pytest test/test_search.py
 """
 
 
@@ -39,6 +39,8 @@ def test_search_2(login):
     page = login
     search = Search
     credentials = Credentials
+
+    page.go_back()
 
     # User search for desired product
     page.get_by_placeholder(search.search_editbox).click()

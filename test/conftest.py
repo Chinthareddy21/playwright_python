@@ -43,7 +43,7 @@ def home_page(playwright: Playwright, logger):
     if page.url == url.Base_url:
         logger.info("Navigated to homepage & Homepage opened")
     else:
-        logger.info("User is not navigated to homepage")
+        logger.warning("User is not navigated to homepage")
 
     page.get_by_label("Close").click()
     logger.info("Ad pop-up closed")
@@ -92,23 +92,19 @@ def login(playwright: Playwright, logger):
     logger.info("Ad pop-up closed")
 
     # Getting homepage API status code
-    page.request.get(url.Base_url)
+    page.request.get(page.url)
 
     # printing homepage API status code
-    print(page.request.get(url.Base_url))
+    print(page.request.get(page.url))
 
     # Step to login page navigation
-    if page.locator(login.account_button).is_visible():
-        page.locator(login.account_button).click()
-        expect(page).to_have_url(url.Login_page_url)
-        logger.info("User clicked on account button & Navigated to Login page")
-    else:
-        logger.info("User failed to click on account button")
+    page.locator(login.account_button).click()
+    logger.info("User clicked on account button & Navigated to Login page")
 
     # Getting login page API status code
-    page.request.get(url.Login_page_url)
+    page.request.get(page.url)
     # printing login page API status code
-    print(page.request.get(url.Login_page_url))
+    print(page.request.get(page.url))
 
     # Entering valid username & password
     page.locator(login.email_editbox_input).fill(credentials.username)
@@ -124,7 +120,14 @@ def login(playwright: Playwright, logger):
         logger.info("User logged in successfully & Navigated to homepage")
         logger.info("User name is mentioned in user profile")
     else:
-        logger.info("User is failed to login")
+        logger.warning("User is failed to login")
+
+    # Getting homepage API status code
+    page.request.get(page.url)
+
+    # printing homepage API status code
+    print(page.request.get(page.url))
+
     yield page
 
     # Browser close
