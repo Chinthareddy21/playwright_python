@@ -24,7 +24,7 @@ def test_check_out(login):
     # Selecting category
     page.get_by_role("link", name="Men", exact=True).first.click()
     # Selecting desired item
-    page.get_by_role("link", name=Credentials.Product_3).click()
+    page.get_by_role("link", name="Men's Fabiani Canvas Navy Weekender Bag").click()
     # Adding item to cart
     page.get_by_role("button", name="Add to cart").click()
 
@@ -41,7 +41,7 @@ def test_check_out(login):
     page.screenshot(path="Screenshots/check_out/added to cart.png")
 
     # Checking the product
-    expect(page.locator(check_out.product_name)).to_have_text(Credentials.Product_name)
+    expect(page.locator(check_out.product_name)).to_have_text("Men's Fabiani Canvas Navy Weekender Bag")
 
     # Checking user email in check out page
     expect(page.locator(check_out.user_email_check)).to_have_text(Credentials.username)
