@@ -43,17 +43,9 @@ def test_product_from_menu(login, logger):
     product = Products_From_Menu
 
     page.locator(product.Menu_Button).first.click()
-    page.locator(product.Menu_categories).get_by_text("Men", exact=True).first.click()
-    page.locator("li").filter(
-        has_text="JewelleryShop All Mens JewelleryNew InWatchesFashion JewelleryFine JewelleryBrac").locator(
-        "span").nth(1).click()
-    page.locator("div").filter(has_text=re.compile(r"^Jewellery$")).nth(2).click()
-    # Verifying user is navigated to selected product page
-    watches_header = page.get_by_role("heading", name="Watches")
-    if watches_header.is_visible():
-        logger.info("User is navigated to watches page and Header contains watches heading")
-    else:
-        logger.warning("User is not navigated to watches page")
+    page.locator("li:nth-child(2) > .thefoschini-vtex-tfg-custom-components-1-x-departmentsNavAnchor").click()
+    page.get_by_role("link", name="Diesel Men's Spiked Black Plated Chronograph Bracelet Watch SALE Diesel Men's Spiked Black Plated Chronograph Bracelet Watch Diesel From R 3199,00").click()
+    page.get_by_role("button", name="Add to cart").click()
 
     # Add to cart screenshot
     page.screenshot(path="Screenshots/Product_From_Category/product from Menu.png")

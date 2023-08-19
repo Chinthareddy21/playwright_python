@@ -5,7 +5,7 @@ from objectRepository.loginObjects import Login_Objects
 from lib.credentials import Credentials
 import logging
 
-expect.set_options(timeout=60 * 1000)
+expect.set_options(timeout=60_000)
 
 
 @pytest.fixture(scope="module")
