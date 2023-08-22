@@ -1,1 +1,0 @@
-[32mINFO    [0m logs.log:test_Add_To_Cart.py:37 Item quantity in the cart isn't increased
