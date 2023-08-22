@@ -9,7 +9,7 @@ Installation Setup:
 
 Tests:
     Run Commands:
-        pytest / Python --To run all Tests
+        pytest --To run all Tests
 
         Pytest test/test_Add_To_Cart.py
         pytest test/test_Address_details.py
@@ -21,7 +21,7 @@ Tests:
         pytest test/test_search.py
         pytest test/test_Sign_Up.py
 
-    Description:
+    Contents:
         test_Add_To_Cart:
             Add to cart functionalities:
                 add to cart

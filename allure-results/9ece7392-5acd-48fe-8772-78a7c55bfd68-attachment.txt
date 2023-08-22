@@ -1,0 +1,10 @@
+[32mINFO    [0m logs.log:conftest.py:71 Chrome browser started
+[32mINFO    [0m logs.log:conftest.py:87 Navigated to homepage & Homepage opened
+[32mINFO    [0m logs.log:conftest.py:92 Ad pop-up closed
+[32mINFO    [0m logs.log:conftest.py:102 User clicked on account button & Navigated to Login page
+[32mINFO    [0m logs.log:conftest.py:106 User entered username
+[32mINFO    [0m logs.log:conftest.py:108 User entered password
+[32mINFO    [0m logs.log:conftest.py:111 User clicked on login button
+[32mINFO    [0m logs.log:conftest.py:116 User logged in successfully & Navigated to homepage
+[32mINFO    [0m logs.log:conftest.py:117 User name is mentioned in user profile
+[32mINFO    [0m logs.log:test_Add_To_Cart.py:19 Item is added to cart

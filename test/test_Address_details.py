@@ -8,7 +8,7 @@ from objectRepository.addressDetailObjects import Address_details
 """
 
 
-def test_login_with_valid_credentials(login):
+def test_adding_Address_details(login):
     # Constructors
     page = login
     address = Address_details

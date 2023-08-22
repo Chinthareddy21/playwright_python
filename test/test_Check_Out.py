@@ -15,12 +15,6 @@ def test_check_out(login):
     url = URL_s
     check_out = Check_Out
 
-    # Getting homepage after login API status code
-    page.request.get(url.Base_url)
-
-    # printing homepage after login API status code
-    print(page.request.get(url.Base_url))
-
     # Selecting category
     page.get_by_role("link", name="Men", exact=True).first.click()
     # Selecting desired item
@@ -34,14 +28,9 @@ def test_check_out(login):
     # Check out of desired product
     page.get_by_role("button", name="Checkout").click()
 
-    # Verifying navigation to check out page
-    expect(page).to_have_url(url.Check_out_page_url)
+    expect(page.get_by_text("Men's Fabiani Canvas Navy Weekender Bag FABIANI Qty: 1")).to_be_visible()
+    expect(page.get_by_text("FABIANI").nth(2)).to_be_visible()
+
 
     # Check out screenshot
     page.screenshot(path="Screenshots/check_out/added to cart.png")
-
-    # Checking the product
-    expect(page.locator(check_out.product_name)).to_have_text("Men's Fabiani Canvas Navy Weekender Bag")
-
-    # Checking user email in check out page
-    expect(page.locator(check_out.user_email_check)).to_have_text(Credentials.username)

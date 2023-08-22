@@ -101,11 +101,6 @@ def login(playwright: Playwright, logger):
     page.locator(login.account_button).click()
     logger.info("User clicked on account button & Navigated to Login page")
 
-    # Getting login page API status code
-    page.request.get(page.url)
-    # printing login page API status code
-    print(page.request.get(page.url))
-
     # Entering valid username & password
     page.locator(login.email_editbox_input).fill(credentials.username)
     logger.info("User entered username")
@@ -116,7 +111,8 @@ def login(playwright: Playwright, logger):
     logger.info("User clicked on login button")
 
     # Verifying wether user successfully logged in or not
-    if "Hello, Skyreaper" in page.locator(login.account_button_after_login).text_content():
+    account = page.locator(login.account_button_after_login).inner_text()
+    if "Hello, Skyreaper" in account:
         logger.info("User logged in successfully & Navigated to homepage")
         logger.info("User name is mentioned in user profile")
     else:

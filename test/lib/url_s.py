@@ -9,4 +9,4 @@ class URL_s:
     Profile_page_url = 'https://bash.com/account#/bash-profile'
 
     # check out page url
-    Check_out_page_url = 'https://bash.com/checkout/#/shipping'
+    Check_out_page_url = 'https://bash.com/checkout/#/profile'
