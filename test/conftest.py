@@ -8,7 +8,7 @@ import logging
 expect.set_options(timeout=60_000)
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="module")
 def logger(request):
     log_file = "logs.log"
     logger = logging.getLogger("logs.log")
@@ -25,7 +25,7 @@ def logger(request):
     return logger
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="module")
 def home_page(playwright: Playwright, logger):
     # Browser and page set up
     browser = playwright.chromium.launch(headless=False)
@@ -64,7 +64,7 @@ def home_page(playwright: Playwright, logger):
     browser.close()
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="module")
 def login(playwright: Playwright, logger):
     # Browser and page set up
     browser = playwright.chromium.launch(headless=False)
