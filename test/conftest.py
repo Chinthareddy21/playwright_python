@@ -8,7 +8,7 @@ import logging
 expect.set_options(timeout=60_000)
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="package")
 def logger(request):
     log_file = "logs.log"
     logger = logging.getLogger("logs.log")
